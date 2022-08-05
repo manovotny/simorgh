@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import React from 'react';
 
 const P = styled.p`
   color: black;
@@ -9,6 +10,6 @@ const P = styled.p`
   }
 `;
 
-const News = () => <P>{'News'}</P>;
+const News = () => <P>News</P>;
 
 export default News;
