@@ -1,15 +1,22 @@
-import styled from '@emotion/styled';
-import React from 'react';
+import useSWR from 'swr';
+import news from '#data/news/frontPage/index.json';
+import FrontPage from '#pages/FrontPage/FrontPage';
 
-const P = styled.p`
-  color: black;
-  font-weight: bold;
-  &:hover {
-    background-color: black;
-    color: white;
-  }
-`;
+const News = () => {
+  const { data } = useSWR('/api/news');
 
-const News = () => <P>News</P>;
+  // MNTODO: Turn this into [service].jsx?
+  return <FrontPage pageData={data} />;
+};
 
 export default News;
+
+export async function getStaticProps() {
+  return {
+    props: {
+      fallback: {
+        '/api/news': news,
+      },
+    },
+  };
+}

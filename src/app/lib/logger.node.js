@@ -1,107 +1,108 @@
 // Node.js logger utility using winston
-const fs = require('fs');
-const path = require('path');
-const { createLogger, format, transports } = require('winston');
+// const fs = require('fs');
+// const path = require('path');
+// const { createLogger, format, transports } = require('winston');
 
-const {
-  combine,
-  printf,
-  simple,
-  timestamp,
-  metadata,
-  json,
-  colorize,
-  prettyPrint,
-} = format;
+// const {
+//   combine,
+//   printf,
+//   simple,
+//   timestamp,
+//   metadata,
+//   json,
+//   colorize,
+//   prettyPrint,
+// } = format;
 
-const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
-const LOG_FILE = 'app.log';
-const LOG_DIR = process.env.LOG_DIR || 'log';
+// const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
+// const LOG_FILE = 'app.log';
+// const LOG_DIR = process.env.LOG_DIR || 'log';
 
-const createLogDirectory = (dirName = 'log') => {
-  if (!fs.existsSync(dirName)) {
-    fs.mkdirSync(dirName);
-  }
-};
+// const createLogDirectory = (dirName = 'log') => {
+//   if (!fs.existsSync(dirName)) {
+//     fs.mkdirSync(dirName);
+//   }
+// };
 
-const logLocation = path.join(LOG_DIR, LOG_FILE);
+// const logLocation = path.join(LOG_DIR, LOG_FILE);
 
-const consoleLogFormat = printf(data => {
-  const logMessage = { ...data.metadata, ...data.message };
+// const consoleLogFormat = printf(data => {
+//   const logMessage = { ...data.metadata, ...data.message };
 
-  return `${data.timestamp} ${data.level} ${JSON.stringify(logMessage)}`;
-});
+//   return `${data.timestamp} ${data.level} ${JSON.stringify(logMessage)}`;
+// });
 
-const loggerOptions = {
-  file: {
-    filename: logLocation,
-    handleExceptions: true,
-    humanReadableUnhandledException: true,
-    level: LOG_LEVEL,
-    maxFiles: 5,
-    maxsize: 104857600, // 100MB
-    tailable: true,
-    format: combine(json()),
-  },
-  console: {
-    handleExceptions: true,
-    humanReadableUnhandledException: true,
-    level: LOG_LEVEL,
-    timestamp: true,
-    format: combine(prettyPrint(), colorize(), consoleLogFormat),
-  },
-};
+// const loggerOptions = {
+//   file: {
+//     filename: logLocation,
+//     handleExceptions: true,
+//     humanReadableUnhandledException: true,
+//     level: LOG_LEVEL,
+//     maxFiles: 5,
+//     maxsize: 104857600, // 100MB
+//     tailable: true,
+//     format: combine(json()),
+//   },
+//   console: {
+//     handleExceptions: true,
+//     humanReadableUnhandledException: true,
+//     level: LOG_LEVEL,
+//     timestamp: true,
+//     format: combine(prettyPrint(), colorize(), consoleLogFormat),
+//   },
+// };
 
 // e.g. outputs 'Article/index.jsx'
-const folderAndFilename = name => {
-  const fileparts = name.split(path.sep);
-  return fileparts.splice(-2).join(path.sep);
-};
+// const folderAndFilename = name => {
+//   const fileparts = name.split(path.sep);
+//   return fileparts.splice(-2).join(path.sep);
+// };
 
-const fileLogger = createLogger({
-  format: format.combine(
-    simple(),
-    timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
+// const fileLogger = createLogger({
+//   format: format.combine(
+//     simple(),
+//     timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
 
-    // creates a metadata object, that uses our custom formatting
-    metadata({
-      fillExcept: ['timestamp', 'level', 'message'],
-    }),
-  ),
-  transports: [
-    new transports.File(loggerOptions.file),
+//     // creates a metadata object, that uses our custom formatting
+//     metadata({
+//       fillExcept: ['timestamp', 'level', 'message'],
+//     }),
+//   ),
+//   transports: [
+//     new transports.File(loggerOptions.file),
 
-    // console output is sent to syslog - this can consume a lot of disk space in instances that
-    // handle a lot of traffic, so we only enable console output in some environments
-    ...(process.env.LOG_TO_CONSOLE === 'true'
-      ? [new transports.Console(loggerOptions.console)]
-      : []),
-  ],
-});
+//     // console output is sent to syslog - this can consume a lot of disk space in instances that
+//     // handle a lot of traffic, so we only enable console output in some environments
+//     ...(process.env.LOG_TO_CONSOLE === 'true'
+//       ? [new transports.Console(loggerOptions.console)]
+//       : []),
+//   ],
+// });
 
 class Logger {
   constructor(callingFile) {
-    createLogDirectory(LOG_DIR);
-    const file = folderAndFilename(callingFile);
+    // createLogDirectory(LOG_DIR);
+    // const file = folderAndFilename(callingFile);
+    const file = callingFile;
 
     this.error = (event, message) => {
-      fileLogger.error({ file, event, message });
+      console.error({ file, event, message });
     };
 
     this.warn = (event, message) => {
-      fileLogger.warn({ file, event, message });
+      console.warn({ file, event, message });
     };
 
     this.info = (event, message) => {
-      fileLogger.info({ file, event, message });
+      console.info({ file, event, message });
     };
 
     this.debug = (event, message) => {
-      fileLogger.debug({ file, event, message });
+      console.debug({ file, event, message });
     };
 
     this.verbose = (event, message) => {
-      fileLogger.log({ file, event, message });
+      console.log({ file, event, message });
     };
   }
 }
