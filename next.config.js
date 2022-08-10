@@ -1,4 +1,5 @@
 const { webpackDirAlias } = require('./dirAlias');
+const MomentTimezoneInclude = require('./src/app/legacy/psammead/moment-timezone-include/src');
 
 module.exports = {
   reactStrictMode: true,
@@ -13,6 +14,10 @@ module.exports = {
       ...webpackDirAlias,
       ...config.resolve.alias,
     };
+
+    config.plugins.push(
+      new MomentTimezoneInclude({ startYear: 2010, endYear: 2025 }),
+    );
 
     return config;
   },
