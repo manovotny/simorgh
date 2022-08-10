@@ -4,18 +4,24 @@ import { CacheProvider } from '@emotion/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import PageWrapper from '#app/Layouts/defaultPageWrapper';
 import { ToggleContextProvider } from '#contexts/ToggleContext';
 import { ServiceContextProvider } from '#contexts/ServiceContext';
 import getToggles from '#lib/config/toggles';
+import { RequestContextProvider } from '#contexts/RequestContext';
+import { EventTrackingContextProvider } from '#contexts/EventTrackingContext';
+import { UserContextProvider } from '#contexts/UserContext';
 
 const cache = createCache({ key: 'next' });
 
 const App = props => {
   const { Component, pageProps, router } = props;
-  const { route } = router;
-  const service = route.split('/')?.[1];
-  const language =
-    pageProps?.fallback?.['/api/news']?.metadata?.language || 'en-gb';
+  const { pathname } = router;
+  const service = pathname.split('/')?.[1];
+  const pageData = pageProps?.fallback?.['/api/news'];
+  const language = pageData?.metadata?.language || 'en-gb';
+  const status = 200;
+  const pageType = 'frontPage';
 
   // Purposely not using `getToggles` from `#lib/utilities/getToggles`
   // because it does a bunch of async logging, which means we'd need to use
@@ -53,7 +59,20 @@ const App = props => {
         </Head>
         <ToggleContextProvider toggles={toggles}>
           <ServiceContextProvider service={service} pageLang={language}>
-            <Component {...pageProps} />
+            <RequestContextProvider
+              pageType={pageType}
+              service={service}
+              statusCode={status}
+              pathname={pathname}
+            >
+              <EventTrackingContextProvider pageData={pageData}>
+                <UserContextProvider>
+                  <PageWrapper pageData={pageData} status={status}>
+                    <Component {...pageData} />
+                  </PageWrapper>
+                </UserContextProvider>
+              </EventTrackingContextProvider>
+            </RequestContextProvider>
           </ServiceContextProvider>
         </ToggleContextProvider>
       </SWRConfig>

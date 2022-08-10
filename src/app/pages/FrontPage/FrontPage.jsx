@@ -25,7 +25,6 @@ import MostReadSection from '#containers/MostRead/section';
 import MostReadSectionLabel from '#containers/MostRead/label';
 import CanonicalAdBootstrapJs from '#containers/Ad/Canonical/CanonicalAdBootstrapJs';
 import { NEGATIVE_MARGIN } from '#lib/styles.const';
-import { useAmp } from 'next/amp';
 
 const FrontPageMostReadSection = styled(MostReadSection)`
   /* To centre page layout for Group 4+ */
@@ -72,9 +71,7 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
   const radioScheduleData = path(['radioScheduleData'], pageData);
   const radioSchedulePosition = path(['radioSchedulePosition'], pageData);
 
-  // MNTODO: RequestContext and move isAmp in there?
-  const { showAdsBasedOnLocation } = useContext(RequestContext);
-  const isAmp = useAmp();
+  const { isAmp, showAdsBasedOnLocation } = useContext(RequestContext);
 
   const offScreenText = (
     // eslint-disable-next-line jsx-a11y/aria-role

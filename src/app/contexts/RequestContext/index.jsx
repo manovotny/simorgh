@@ -7,6 +7,7 @@ import getOriginContext from './getOriginContext';
 import getEnv from './getEnv';
 import getMetaUrls from './getMetaUrls';
 import variantPropType from '../../models/propTypes/variants';
+import { useAmp } from 'next/amp';
 
 export const RequestContext = React.createContext({});
 
@@ -14,7 +15,6 @@ export const RequestContextProvider = ({
   children,
   bbcOrigin,
   id,
-  isAmp,
   pageType,
   service,
   statusCode,
@@ -24,6 +24,7 @@ export const RequestContextProvider = ({
   timeOnServer,
   showAdsBasedOnLocation,
 }) => {
+  const isAmp = useAmp();
   const { isUK, origin } = getOriginContext(bbcOrigin);
   const env = getEnv(origin);
   const platform = isAmp ? 'amp' : 'canonical';
@@ -67,7 +68,6 @@ RequestContextProvider.propTypes = {
   bbcOrigin: string,
   children: node.isRequired,
   id: string,
-  isAmp: bool.isRequired,
   pageType: oneOf(Object.values(pageTypes)).isRequired,
   service: string.isRequired,
   statusCode: number,
