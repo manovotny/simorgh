@@ -16,10 +16,8 @@ const cache = createCache({ key: 'next' });
 
 const App = props => {
   const { Component, pageProps, router } = props;
-  const { pathname } = router;
-  const service = pathname.split('/')?.[1];
-  const pageData = pageProps?.fallback?.['/api/news'];
-  const language = pageData?.metadata?.language || 'en-gb';
+  const { asPath, service } = router.query;
+  const language = pageProps?.metadata?.language || 'en-gb';
   const status = 200;
   const pageType = 'frontPage';
 
@@ -63,12 +61,12 @@ const App = props => {
               pageType={pageType}
               service={service}
               statusCode={status}
-              pathname={pathname}
+              pathname={asPath}
             >
-              <EventTrackingContextProvider pageData={pageData}>
+              <EventTrackingContextProvider pageData={pageProps}>
                 <UserContextProvider>
-                  <PageWrapper pageData={pageData} status={status}>
-                    <Component {...pageData} />
+                  <PageWrapper pageData={pageProps} status={status}>
+                    <Component {...pageProps} />
                   </PageWrapper>
                 </UserContextProvider>
               </EventTrackingContextProvider>
