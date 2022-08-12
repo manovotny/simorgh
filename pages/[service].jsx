@@ -3,7 +3,12 @@ import fs from 'node:fs/promises';
 import ms from 'ms';
 import glob from 'glob';
 import FrontPage from '#pages/FrontPage/FrontPage';
-import { filterNews } from '../lib/filter';
+
+import filterUnknownContentTypes from '#app/routes/utils/sharedDataTransformers/filterUnknownContentTypes';
+import filterEmptyGroupItems from '#app/routes/utils/sharedDataTransformers/filterEmptyGroupItems';
+import squashTopStories from '#app/routes/utils/sharedDataTransformers/squashTopStories';
+import addIdsToGroups from '#app/routes/utils/sharedDataTransformers/addIdsToGroups';
+import filterGroupsWithoutStraplines from '#app/routes/utils/sharedDataTransformers/filterGroupsWithoutStraplines';
 
 const News = props => {
   return <FrontPage pageData={props} />;
@@ -26,11 +31,16 @@ export const getStaticProps = async ({ params }) => {
     'frontpage',
     'index.json',
   );
-  const data = JSON.parse(await fs.readFile(dataPath, 'utf8'));
-  const filteredData = filterNews(data);
+  let data = JSON.parse(await fs.readFile(dataPath, 'utf-8'));
+
+  data = filterUnknownContentTypes(data);
+  data = filterEmptyGroupItems(data);
+  data = addIdsToGroups(data);
+  data = squashTopStories(data);
+  data = filterGroupsWithoutStraplines(data);
 
   return {
-    props: filteredData,
+    props: data,
     revalidate: ms('5m'),
   };
 };
