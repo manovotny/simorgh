@@ -10,8 +10,8 @@ import squashTopStories from '#app/routes/utils/sharedDataTransformers/squashTop
 import addIdsToGroups from '#app/routes/utils/sharedDataTransformers/addIdsToGroups';
 import filterGroupsWithoutStraplines from '#app/routes/utils/sharedDataTransformers/filterGroupsWithoutStraplines';
 
-const News = props => {
-  return <FrontPage pageData={props} />;
+const News = ({ pageData, mostRead }) => {
+  return <FrontPage mostRead={mostRead} pageData={pageData} />;
 };
 
 export const getStaticPaths = () => {
@@ -24,23 +24,27 @@ export const getStaticPaths = () => {
 
 export const getStaticProps = async ({ params }) => {
   const { service } = params;
-  const dataPath = path.join(
-    process.cwd(),
-    'data',
-    service,
-    'frontpage',
-    'index.json',
-  );
-  let data = JSON.parse(await fs.readFile(dataPath, 'utf-8'));
+  const servicePath = path.join(process.cwd(), 'data', service);
+  const pageDataPath = path.join(servicePath, 'frontpage', 'index.json');
+  const mostReadPath = path.join(servicePath, 'mostRead', 'index.json');
+  let mostRead = {};
+  let pageData = JSON.parse(await fs.readFile(pageDataPath, 'utf-8'));
 
-  data = filterUnknownContentTypes(data);
-  data = filterEmptyGroupItems(data);
-  data = addIdsToGroups(data);
-  data = squashTopStories(data);
-  data = filterGroupsWithoutStraplines(data);
+  pageData = filterUnknownContentTypes(pageData);
+  pageData = filterEmptyGroupItems(pageData);
+  pageData = addIdsToGroups(pageData);
+  pageData = squashTopStories(pageData);
+  pageData = filterGroupsWithoutStraplines(pageData);
+
+  try {
+    mostRead = JSON.parse(await fs.readFile(mostReadPath, 'utf-8'));
+  } catch {}
 
   return {
-    props: data,
+    props: {
+      pageData,
+      mostRead,
+    },
     revalidate: ms('5m'),
   };
 };

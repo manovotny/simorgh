@@ -46,9 +46,9 @@ const MostReadWrapper = ({ children }) => (
   </FrontPageMostReadSection>
 );
 
-const renderMostRead = mostReadEndpointOverride => (
+const renderMostRead = mostRead => (
   <MostReadContainer
-    mostReadEndpointOverride={mostReadEndpointOverride}
+    initialData={mostRead}
     columnLayout="twoColumn"
     wrapper={MostReadWrapper}
   />
@@ -58,7 +58,7 @@ MostReadWrapper.propTypes = {
   children: node.isRequired,
 };
 
-const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
+const FrontPage = ({ pageData, mostRead }) => {
   const { product, serviceLocalizedName, translations, frontPageTitle } =
     useContext(ServiceContext);
 
@@ -121,7 +121,7 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
               {group.type === 'top-stories' && <MPUContainer />}
             </Fragment>
           ))}
-          {!hasUsefulLinks && renderMostRead(mostReadEndpointOverride)}
+          {!hasUsefulLinks && renderMostRead(mostRead)}
         </IndexPageContainer>
       </main>
     </>
