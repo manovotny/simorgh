@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import isLive from '#lib/utilities/isLive';
 
 const buildScript = ({
@@ -8,7 +8,7 @@ const buildScript = ({
   identityPoolId,
   guestRoleArn,
 }) => (
-  <Helmet>
+  <Head>
     <script>
       {`
         (function(n,i,v,r,s,c,x,z){x=window.AwsRumClient={q:[],n:n,i:i,v:v,r:r,c:c};window[n]=function(c,p){x.q.push({c:c,p:p});};z=document.createElement('script');z.async=true;z.src=s;document.head.insertBefore(z,document.head.getElementsByTagName('script')[0]);})(
@@ -28,7 +28,7 @@ const buildScript = ({
         });
       `}
     </script>
-  </Helmet>
+  </Head>
 );
 
 const RUMLoader = Component => {

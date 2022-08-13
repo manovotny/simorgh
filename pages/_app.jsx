@@ -14,8 +14,7 @@ import { UserContextProvider } from '#contexts/UserContext';
 
 const cache = createCache({ key: 'next' });
 
-const App = props => {
-  const { Component, pageProps, router } = props;
+const App = ({ Component, pageProps, router }) => {
   const { asPath, service } = router.query;
   const language = pageProps?.metadata?.language || 'en-gb';
   const status = 200;

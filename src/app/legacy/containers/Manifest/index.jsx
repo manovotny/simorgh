@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import { ServiceContext } from '#contexts/ServiceContext';
 
 const ManifestContainer = () => {
@@ -10,9 +10,9 @@ const ManifestContainer = () => {
   }
 
   return (
-    <Helmet>
+    <Head>
       <link rel="manifest" href={`/public/${service}${manifestPath}`} />
-    </Helmet>
+    </Head>
   );
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import pathOr from 'ramda/src/pathOr';
 import { shape, string } from 'prop-types';
 import { mediaPlayerMetadata } from './helpers/metadata';
@@ -14,11 +14,11 @@ const Metadata = ({ aresMediaBlock, embedSource }) => {
   const metadata = mediaPlayerMetadata(aresMediaBlocks, embedSource);
 
   return (
-    <Helmet>
+    <Head>
       {metadata && (
         <script type="application/ld+json">{JSON.stringify(metadata)}</script>
       )}
-    </Helmet>
+    </Head>
   );
 };
 

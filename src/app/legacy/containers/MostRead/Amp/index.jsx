@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import { string, oneOf, elementType } from 'prop-types';
 import styled from '@emotion/styled';
 import {
@@ -73,17 +73,18 @@ const AmpMostRead = ({ endpoint, size, wrapper: Wrapper }) => {
   return (
     <amp-script id="dataFunctions" script="local-script">
       <Wrapper>
-        <Helmet
-          script={[
-            {
-              id: 'local-script',
-              type: 'text/plain',
-              target: 'amp-script',
-              innerHTML: onlyinnerscript,
-            },
-          ]}
-        />
-        <Helmet>
+        <Head>
+          <script
+            id="local-script"
+            type="text/plain"
+            target="amp-script"
+            custom-element="amp-iframe"
+            src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
+          >
+            `${onlyinnerscript}`
+          </script>
+        </Head>
+        <Head>
           {/* Import required amp scripts for most read */}
           {AMP_LIST_JS}
           {AMP_MUSTACHE_JS}
@@ -97,7 +98,7 @@ const AmpMostRead = ({ endpoint, size, wrapper: Wrapper }) => {
               'base64',
             )}
           />
-        </Helmet>
+        </Head>
 
         <amp-list
           src="amp-script:dataFunctions.getRemoteData"

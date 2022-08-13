@@ -1,17 +1,17 @@
 import React from 'react';
 import { string } from 'prop-types';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import ImagePlaceholder from '#psammead/psammead-image-placeholder/src';
 import Message from '../Message';
 
 const AmpHead = () => (
-  <Helmet>
+  <Head>
     <script
       async
       custom-element="amp-iframe"
       src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
     />
-  </Helmet>
+  </Head>
 );
 
 const AmpMediaPlayer = ({

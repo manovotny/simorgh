@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { oneOf } from 'prop-types';
 import styled from '@emotion/styled';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import pathOr from 'ramda/src/pathOr';
 import { RequestContext } from '#contexts/RequestContext';
 import { ServiceContext } from '#contexts/ServiceContext';
@@ -163,11 +163,11 @@ const AmpAd = ({ slotType }) => {
 
   return (
     <>
-      <Helmet>
+      <Head>
         {AMP_ADS_JS}
         {AMP_ACCESS_JS}
         {AMP_ACCESS_FETCH(service)}
-      </Helmet>
+      </Head>
       <Advert
         service={service}
         script={script}

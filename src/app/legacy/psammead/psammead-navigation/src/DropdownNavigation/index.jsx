@@ -14,7 +14,7 @@ import {
   GEL_SPACING,
   GEL_SPACING_HLF_TRPL,
 } from '#psammead/gel-foundations/src/spacings';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import {
   GEL_GROUP_3_SCREEN_WIDTH_MIN,
   GEL_GROUP_B_MIN_WIDTH,
@@ -268,13 +268,13 @@ CanonicalMenuButton.defaultProps = {
 };
 
 const AmpHead = () => (
-  <Helmet>
+  <Head>
     <script
       async
       custom-element="amp-bind"
       src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
     />
-  </Helmet>
+  </Head>
 );
 
 const expandedHandler =

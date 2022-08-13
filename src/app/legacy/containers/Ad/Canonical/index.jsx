@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import { oneOf, string } from 'prop-types';
 import styled from '@emotion/styled';
 import pathOr from 'ramda/src/pathOr';
@@ -71,7 +71,7 @@ const CanonicalAd = ({ slotType, className }) => {
 
   return (
     <>
-      <Helmet>
+      <Head>
         {/* Add Ad scripts to document head */}
         <script type="module" src={getBootstrapSrc(queryString)} async />
         <script
@@ -79,7 +79,7 @@ const CanonicalAd = ({ slotType, className }) => {
           src={getBootstrapSrc(queryString, true)}
           async
         />
-      </Helmet>
+      </Head>
 
       <AdContainer
         slotType={slotType}

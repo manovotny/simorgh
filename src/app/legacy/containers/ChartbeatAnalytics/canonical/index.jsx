@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import { canonicalChartbeatPropTypes } from '#models/propTypes/chartbeatAnalytics';
 
 const chartbeatSource = '//static.chartbeat.com/js/chartbeat.js';
@@ -17,7 +17,7 @@ const CanonicalChartbeatBeacon = ({ chartbeatConfig }) => {
   }, [chartbeatConfig]);
 
   return (
-    <Helmet>
+    <Head>
       <script async type="text/javascript">
         {`
         (function(){
@@ -30,7 +30,7 @@ const CanonicalChartbeatBeacon = ({ chartbeatConfig }) => {
       `}
       </script>
       <script defer type="text/javascript" src={chartbeatSource} />
-    </Helmet>
+    </Head>
   );
 };
 

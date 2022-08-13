@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import LazyLoad from 'react-lazyload';
 import ImagePlaceholder from '#psammead/psammead-image-placeholder/src';
 import Image, { AmpImg } from '#psammead/psammead-image/src';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import { C_GHOST } from '#psammead/psammead-styles/src/colours';
 import { RequestContext } from '#contexts/RequestContext';
 
@@ -70,7 +70,7 @@ const ImageWithPlaceholder = ({
   return (
     <>
       {preload && (
-        <Helmet>
+        <Head>
           <link
             rel="preload"
             as="image"
@@ -78,7 +78,7 @@ const ImageWithPlaceholder = ({
             imagesrcset={srcset}
             imagesizes={sizes}
           />
-        </Helmet>
+        </Head>
       )}
       <ImagePlaceholder
         forwardStyle={isLoaded ? { background: 'none' } : null}

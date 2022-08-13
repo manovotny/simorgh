@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import {
   AMP_SCRIPT,
   AMP_NO_SCRIPT,
@@ -15,7 +15,7 @@ import {
 
 const AmpDecorator = storyFn => (
   <div>
-    <Helmet htmlAttributes={{ amp: '' }}>
+    <Head>
       <link rel="canonical" href="http://foobar.com" />
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width,minimum-scale=1" />
@@ -25,7 +25,7 @@ const AmpDecorator = storyFn => (
       {AMP_GEO_JS}
       {AMP_CONSENT_JS}
       {AMP_ANALYTICS_JS}
-    </Helmet>
+    </Head>
     {storyFn()}
   </div>
 );

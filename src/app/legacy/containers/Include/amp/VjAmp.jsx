@@ -8,20 +8,20 @@ import {
 import { C_EBON } from '#psammead/psammead-styles/src/colours';
 import { getSansBold } from '#psammead/psammead-styles/src/font-styles';
 import { GEL_PICA } from '#psammead/gel-foundations/src/typography';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import { GridItemMedium } from '#components/Grid';
 import { ServiceContext } from '#contexts/ServiceContext';
 
 const KEYLINE_WIDTH = '0.125rem';
 
 const AmpHead = () => (
-  <Helmet>
+  <Head>
     <script
       async
       custom-element="amp-iframe"
       src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
     />
-  </Helmet>
+  </H>
 );
 
 const AmpIframe = ({ children, className, width, height, src }) => (

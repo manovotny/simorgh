@@ -99,12 +99,6 @@ const MetadataContainer = ({
     },
   ];
 
-  const htmlAttributes = {
-    dir,
-    lang,
-    ...(isAmp && { amp: '' }), // empty value as this makes Helmet render 'amp' as per https://www.ampproject.org/docs/fundamentals/spec#ampd
-  };
-
   const pageTitle = `${title} - ${brandName}`;
   const socialTitle = `${socialHeadline || title} - ${brandName}`;
 
@@ -112,7 +106,6 @@ const MetadataContainer = ({
   const metaImageAltText = imageAltText || defaultImageAltText;
   const linkToAmpPage = hasAmpPage && !isAmp;
 
-  // MNTODO: Check head elements render correctly.
   return (
     <Head>
       <meta name="theme-color" content={themeColor} />
