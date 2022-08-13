@@ -130,11 +130,11 @@ const FrontPage = ({ pageData, mostRead }) => {
 
 FrontPage.propTypes = {
   pageData: frontPageDataPropTypes.isRequired,
-  mostReadEndpointOverride: string,
+  mostRead: string,
 };
 
 FrontPage.defaultProps = {
-  mostReadEndpointOverride: null,
+  mostRead: null,
 };
 
 export default FrontPage;

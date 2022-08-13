@@ -114,7 +114,7 @@ const MpuContainer = styled(AdContainer)`
   margin-bottom: ${GEL_SPACING_TRPL};
 `;
 
-const ArticlePage = ({ pageData, mostReadEndpointOverride }) => {
+const ArticlePage = ({ pageData, mostRead }) => {
   const { isAmp, showAdsBasedOnLocation } = useContext(RequestContext);
   const { articleAuthor, showRelatedTopics } = useContext(ServiceContext);
   const { enabled: preloadLeadImageToggle } = useToggle('preloadLeadImage');
@@ -202,7 +202,7 @@ const ArticlePage = ({ pageData, mostReadEndpointOverride }) => {
       <ChartbeatAnalytics data={pageData} />
       <ComscoreAnalytics />
       <NielsenAnalytics />
-      <OptimizelyPageViewTracking />
+      {/* <OptimizelyPageViewTracking /> */}
       <ArticleMetadata
         articleId={getArticleId(pageData)}
         title={headline}
@@ -251,21 +251,18 @@ const ArticlePage = ({ pageData, mostReadEndpointOverride }) => {
         </Primary>
         <SecondaryColumn pageData={pageData} />
       </ArticlePageGrid>
-      <MostReadContainer
-        mostReadEndpointOverride={mostReadEndpointOverride}
-        wrapper={MostReadWrapper}
-      />
+      <MostReadContainer initialData={mostRead} wrapper={MostReadWrapper} />
     </Wrapper>
   );
 };
 
 ArticlePage.propTypes = {
   pageData: articleDataPropTypes.isRequired,
-  mostReadEndpointOverride: string,
+  mostRead: string,
 };
 
 ArticlePage.defaultProps = {
-  mostReadEndpointOverride: null,
+  mostRead: null,
 };
 
 export default ArticlePage;

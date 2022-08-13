@@ -25,9 +25,8 @@ export const getStaticPaths = () => {
 export const getStaticProps = async ({ params }) => {
   const { service } = params;
   const servicePath = path.join(process.cwd(), 'data', service);
+
   const pageDataPath = path.join(servicePath, 'frontpage', 'index.json');
-  const mostReadPath = path.join(servicePath, 'mostRead', 'index.json');
-  let mostRead = {};
   let pageData = JSON.parse(await fs.readFile(pageDataPath, 'utf-8'));
 
   pageData = filterUnknownContentTypes(pageData);
@@ -36,6 +35,8 @@ export const getStaticProps = async ({ params }) => {
   pageData = squashTopStories(pageData);
   pageData = filterGroupsWithoutStraplines(pageData);
 
+  let mostRead = {};
+  const mostReadPath = path.join(servicePath, 'mostRead', 'index.json');
   try {
     mostRead = JSON.parse(await fs.readFile(mostReadPath, 'utf-8'));
   } catch {}
