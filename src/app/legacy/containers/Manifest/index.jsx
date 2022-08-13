@@ -11,7 +11,7 @@ const ManifestContainer = () => {
 
   return (
     <Helmet>
-      <link rel="manifest" href={`/${service}${manifestPath}`} />
+      <link rel="manifest" href={`/public/${service}${manifestPath}`} />
     </Helmet>
   );
 };
