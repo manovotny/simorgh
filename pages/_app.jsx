@@ -17,7 +17,8 @@ const cache = createCache({ key: 'next' });
 const App = ({ Component, pageProps, router }) => {
   const { asPath, query } = router;
   const { service } = query;
-  const language = pageProps?.metadata?.language || 'en-gb';
+  const { pageData } = pageProps;
+  const language = pageData?.metadata?.language || 'en-gb';
   const status = 200;
   const pageType = 'frontPage';
 
@@ -65,7 +66,7 @@ const App = ({ Component, pageProps, router }) => {
             >
               <EventTrackingContextProvider pageData={pageProps}>
                 <UserContextProvider>
-                  <PageWrapper pageData={pageProps} status={status}>
+                  <PageWrapper pageData={pageData} status={status}>
                     <Component {...pageProps} />
                   </PageWrapper>
                 </UserContextProvider>
