@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react';
-import { string, node } from 'prop-types';
+import PropTypes, { node } from 'prop-types';
 import path from 'ramda/src/path';
 import findIndex from 'ramda/src/findIndex';
 import styled from '@emotion/styled';
@@ -130,7 +130,7 @@ const FrontPage = ({ pageData, mostRead }) => {
 
 FrontPage.propTypes = {
   pageData: frontPageDataPropTypes.isRequired,
-  mostRead: string,
+  mostRead: PropTypes.oneOfType([PropTypes.object]),
 };
 
 FrontPage.defaultProps = {
