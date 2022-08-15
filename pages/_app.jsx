@@ -17,10 +17,9 @@ const cache = createCache({ key: 'next' });
 const App = ({ Component, pageProps, router }) => {
   const { asPath, query } = router;
   const { service } = query;
-  const { pageData } = pageProps;
+  const { pageData, pageType } = pageProps;
   const language = pageData?.metadata?.language || 'en-gb';
   const status = 200;
-  const pageType = 'frontPage';
 
   // Purposely not using `getToggles` from `#lib/utilities/getToggles`
   // because it does a bunch of async logging, which means we'd need to use

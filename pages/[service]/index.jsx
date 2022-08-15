@@ -3,6 +3,7 @@ import fs from 'node:fs/promises';
 import ms from 'ms';
 import glob from 'glob';
 import FrontPage from '#pages/FrontPage/FrontPage';
+import { FRONT_PAGE } from '#app/routes/utils/pageTypes';
 
 import filterUnknownContentTypes from '#app/routes/utils/sharedDataTransformers/filterUnknownContentTypes';
 import filterEmptyGroupItems from '#app/routes/utils/sharedDataTransformers/filterEmptyGroupItems';
@@ -44,6 +45,7 @@ export const getStaticProps = async ({ params }) => {
   return {
     props: {
       pageData,
+      pageType: FRONT_PAGE,
       mostRead,
     },
     revalidate: ms('5m'),

@@ -2,6 +2,7 @@ import path from 'node:path';
 import fs from 'node:fs/promises';
 import ms from 'ms';
 import glob from 'glob';
+import { ARTICLE_PAGE } from '#app/routes/utils/pageTypes';
 import handleGroupBlocks from '#app/routes/article/handleGroupBlocks';
 import handleEmptyParagraphBlocks from '#app/routes/article/handleEmptyParagraphBlocks';
 import handlePromoData from '#app/routes/article/handlePromoData';
@@ -74,6 +75,7 @@ export const getStaticProps = async ({ params }) => {
         ...pageData,
         secondaryColumn,
       },
+      pageType: ARTICLE_PAGE,
       mostRead,
     },
     revalidate: ms('1h'),
