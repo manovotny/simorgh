@@ -4,7 +4,7 @@ import pathOr from 'ramda/src/pathOr';
 import propEq from 'ramda/src/propEq';
 import last from 'ramda/src/last';
 import styled from '@emotion/styled';
-import { string, node } from 'prop-types';
+import PropTypes, { node } from 'prop-types';
 import useToggle from '#hooks/useToggle';
 
 import {
@@ -258,7 +258,7 @@ const ArticlePage = ({ pageData, mostRead }) => {
 
 ArticlePage.propTypes = {
   pageData: articleDataPropTypes.isRequired,
-  mostRead: string,
+  mostRead: PropTypes.oneOfType([PropTypes.object]),
 };
 
 ArticlePage.defaultProps = {
