@@ -13,9 +13,9 @@ export default service => {
         expect(h4El.textContent).toMatchSnapshot();
       });
 
-      if (window.SIMORGH_DATA) {
+      if (window.NEXT_PUBLIC_SIMORGH_DATA) {
         const topStoriesGroup =
-          window.SIMORGH_DATA.pageData.content.groups[0].items[0];
+          window.NEXT_PUBLIC_SIMORGH_DATA.pageData.content.groups[0].items[0];
         const { relatedItems } = topStoriesGroup;
 
         if (relatedItems.length > 1) {

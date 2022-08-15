@@ -25,7 +25,7 @@ const renderNoScriptTrackingPixel = atiPageViewUrl => (
 
 const CanonicalATIAnalytics = ({ pageviewParams }) => {
   const [atiPageViewUrl] = useState(
-    process.env.SIMORGH_ATI_BASE_URL + pageviewParams,
+    process.env.NEXT_PUBLIC_SIMORGH_ATI_BASE_URL + pageviewParams,
   );
 
   useEffect(() => {

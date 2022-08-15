@@ -1,6 +1,6 @@
 import is from 'ramda/src/is';
 
-export const FALLBACK_PLACEHOLDER_IMAGE_URL = `${process.env.SIMORGH_PUBLIC_STATIC_ASSETS_ORIGIN}${process.env.SIMORGH_PUBLIC_STATIC_ASSETS_PATH}images/media_placeholder.png`;
+export const FALLBACK_PLACEHOLDER_IMAGE_URL = `${process.env.NEXT_PUBLIC_SIMORGH_PUBLIC_STATIC_ASSETS_ORIGIN}${process.env.NEXT_PUBLIC_SIMORGH_PUBLIC_STATIC_ASSETS_PATH}images/media_placeholder.png`;
 
 const getPlaceholderImageUrl = imageUrl => {
   if (imageUrl && is(String, imageUrl)) {

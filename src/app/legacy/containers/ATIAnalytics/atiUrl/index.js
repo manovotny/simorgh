@@ -325,7 +325,7 @@ export const buildATIEventTrackUrl = ({
     },
   ];
 
-  return `${process.env.SIMORGH_ATI_BASE_URL}${getAtiUrl(
+  return `${process.env.NEXT_PUBLIC_SIMORGH_ATI_BASE_URL}${getAtiUrl(
     eventTrackingBeaconValues,
   )}&type=AT`;
 };

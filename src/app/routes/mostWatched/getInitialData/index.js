@@ -6,7 +6,7 @@ import processMostWatched from '../../utils/processMostWatched';
 export default async ({ service, variant, pageType, toggles, path }) => {
   const env = path.includes('renderer_env=live')
     ? 'live'
-    : process.env.SIMORGH_APP_ENV;
+    : process.env.NEXT_PUBLIC_SIMORGH_APP_ENV;
 
   try {
     const mostWatchedUrl = getMostWatchedUrl({ service, variant, env });

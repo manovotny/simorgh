@@ -11,7 +11,7 @@ export default (href, type, pathname) => {
 
   const withTrailingHref = href.startsWith('/') ? href : `/${href}`;
 
-  const includeUrl = `${process.env.SIMORGH_INCLUDES_BASE_URL}${withTrailingHref}${mutator[type]}`;
+  const includeUrl = `${process.env.NEXT_PUBLIC_SIMORGH_INCLUDES_BASE_URL}${withTrailingHref}${mutator[type]}`;
 
   const currentRendererEnv = new Url(pathname, true).query.renderer_env;
 

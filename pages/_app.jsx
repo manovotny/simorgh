@@ -27,10 +27,12 @@ const App = ({ Component, pageProps, router }) => {
   // `useEffect` or `getInitialProps` and that would disable SSR. The benefit
   // is not *that* important to warrant turning that off.
   //
+  // Could also be moved to the Layout RFC, but just going to keep it simple.
+  //
   // import getToggles from '#lib/utilities/getToggles';
   // const toggles = await getToggles(service);
 
-  const environment = process.env.SIMORGH_APP_ENV || 'local';
+  const environment = process.env.NEXT_PUBLIC_SIMORGH_APP_ENV || 'local';
   const toggles = getToggles[environment];
 
   return (

@@ -6,8 +6,9 @@ import { UserContext } from '#contexts/UserContext';
 const CanonicalComscoreAnalytics = () => {
   const { personalisationEnabled } = useContext(UserContext);
 
-  const staticAssetsPath = `${process.env.SIMORGH_PUBLIC_STATIC_ASSETS_ORIGIN}${process.env.SIMORGH_PUBLIC_STATIC_ASSETS_PATH}`;
-  const comscoreScript = 'static/js/comscore/main-1.0.js';
+  const staticAssetsPath = `${process.env.NEXT_PUBLIC_SIMORGH_PUBLIC_STATIC_ASSETS_ORIGIN}${process.env.NEXT_PUBLIC_SIMORGH_PUBLIC_STATIC_ASSETS_PATH}`;
+  const comscoreScript = 'js/comscore/main-1.0.js';
+  const src = `${staticAssetsPath}${comscoreScript}`;
 
   useEffect(() => {
     const csUcfr = personalisationEnabled ? '1' : '';
@@ -18,11 +19,7 @@ const CanonicalComscoreAnalytics = () => {
 
   return (
     <Head>
-      <script
-        async
-        type="text/javascript"
-        src={`${staticAssetsPath}${comscoreScript}`}
-      />
+      <script async type="text/javascript" src={src} />
       <noscript>
         {`<img src="https://sb.scorecardresearch.com/p?c1=2&c2=17986528&cv=2.0&cj=1" />`}
       </noscript>

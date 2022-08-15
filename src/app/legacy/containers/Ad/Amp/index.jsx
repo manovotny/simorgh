@@ -75,7 +75,7 @@ const AMP_ACCESS_DATA = endpoint => ({
 const LABEL_LINK = 'https://www.bbc.com/usingthebbc/cookies/';
 
 export const AMP_ACCESS_FETCH = service => {
-  const togglesEndpoint = `${process.env.SIMORGH_CONFIG_URL}?application=simorgh&service=${service}`;
+  const togglesEndpoint = `${process.env.NEXT_PUBLIC_SIMORGH_CONFIG_URL}?application=simorgh&service=${service}`;
 
   return (
     <script id="amp-access" type="application/json">

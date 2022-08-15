@@ -33,7 +33,7 @@ const generateImageBlock = () => {
           type: 'rawImage',
           model: {
             copyrightHolder: '',
-            locator: `${process.env.SIMORGH_PUBLIC_STATIC_ASSETS_ORIGIN}${process.env.SIMORGH_PUBLIC_STATIC_ASSETS_PATH}images/media_placeholder.png`,
+            locator: `${process.env.NEXT_PUBLIC_SIMORGH_PUBLIC_STATIC_ASSETS_ORIGIN}${process.env.NEXT_PUBLIC_SIMORGH_PUBLIC_STATIC_ASSETS_PATH}images/media_placeholder.png`,
             originCode: 'pips',
           },
         },

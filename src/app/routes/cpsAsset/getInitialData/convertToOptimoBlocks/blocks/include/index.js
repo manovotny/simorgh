@@ -49,7 +49,7 @@ const convertInclude = async (includeBlock, pageData, ...restParams) => {
   if (classification === 'vj-supports-amp') {
     ampMetadata = ampMetadataExtractor(
       href,
-      process.env.SIMORGH_INCLUDES_BASE_AMP_URL,
+      process.env.NEXT_PUBLIC_SIMORGH_INCLUDES_BASE_AMP_URL,
     );
   }
 

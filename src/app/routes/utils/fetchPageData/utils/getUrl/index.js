@@ -6,7 +6,7 @@ import getBaseUrl from '../getBaseUrl';
 
 const baseUrl = onClient()
   ? getBaseUrl(window.location.origin)
-  : process.env.SIMORGH_BASE_URL;
+  : process.env.NEXT_PUBLIC_SIMORGH_BASE_URL;
 
 export default pathname => {
   if (!pathname) return '';

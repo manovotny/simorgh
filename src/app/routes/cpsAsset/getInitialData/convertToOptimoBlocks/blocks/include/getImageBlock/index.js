@@ -8,7 +8,7 @@ const getImageBlock = (type, blockData, isAmp) => {
   if (!supportedImageTypes.includes(type) || !imageData) return null;
 
   const getSrc = href => {
-    return `${process.env.SIMORGH_INCLUDES_BASE_URL}${href}`;
+    return `${process.env.NEXT_PUBLIC_SIMORGH_INCLUDES_BASE_URL}${href}`;
   };
 
   const getSize = href => href.split('/').pop();

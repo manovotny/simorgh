@@ -14,7 +14,7 @@ const AmpATIAnalytics = ({ pageviewParams }) => {
     <amp-analytics>
       {JsonInlinedScript(
         getAmpAnalyticsJson({
-          baseUrl: process.env.SIMORGH_ATI_BASE_URL,
+          baseUrl: process.env.NEXT_PUBLIC_SIMORGH_ATI_BASE_URL,
           pageviewParams,
         }),
       )}
