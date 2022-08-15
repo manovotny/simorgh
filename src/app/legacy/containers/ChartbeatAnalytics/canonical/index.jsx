@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Head from 'next/head';
+import Script from 'next/script';
 import { canonicalChartbeatPropTypes } from '#models/propTypes/chartbeatAnalytics';
 
 const chartbeatSource = '//static.chartbeat.com/js/chartbeat.js';
@@ -17,8 +17,8 @@ const CanonicalChartbeatBeacon = ({ chartbeatConfig }) => {
   }, [chartbeatConfig]);
 
   return (
-    <Head>
-      <script async type="text/javascript">
+    <>
+      <Script id="chartbeat-config-script" async type="text/javascript">
         {`
         (function(){
           var _sf_async_config = window._sf_async_config = (window._sf_async_config || {});
@@ -28,9 +28,14 @@ const CanonicalChartbeatBeacon = ({ chartbeatConfig }) => {
           }
         })();
       `}
-      </script>
-      <script defer type="text/javascript" src={chartbeatSource} />
-    </Head>
+      </Script>
+      <Script
+        id="chartbeat-source-script"
+        defer
+        type="text/javascript"
+        src={chartbeatSource}
+      />
+    </>
   );
 };
 

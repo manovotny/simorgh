@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { string } from 'prop-types';
+import Script from 'next/script';
 
 // styled-components removes non-standard attributes (such as AMP attributes) on
 // server rendering. spreading props like this allows us to add AMP attributes
@@ -21,7 +22,8 @@ const DisplayWrapper = styled(AccessDiv)`
 const AmpNielsenAnalytics = ({ apid, section }) => (
   <DisplayWrapper>
     <amp-analytics type="nielsen">
-      <script
+      <Script
+        id="nielsen-analytics-script"
         type="application/json"
         /* eslint-disable-next-line react/no-danger */
         dangerouslySetInnerHTML={{

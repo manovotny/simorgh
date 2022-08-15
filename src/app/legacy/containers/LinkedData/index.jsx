@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Head from 'next/head';
+import Script from 'next/script';
 import { string, shape, arrayOf, bool, object } from 'prop-types';
 import { ServiceContext } from '#contexts/ServiceContext';
 import { RequestContext } from '#contexts/RequestContext';
@@ -105,14 +105,12 @@ const LinkedData = ({
   };
 
   return (
-    <Head>
-      <script type="application/ld+json">
-        {serialiseForScript({
-          '@context': 'http://schema.org',
-          '@graph': [{ ...linkedData }, ...entities],
-        })}
-      </script>
-    </Head>
+    <Script id="schema-script" type="application/ld+json">
+      {serialiseForScript({
+        '@context': 'http://schema.org',
+        '@graph': [{ ...linkedData }, ...entities],
+      })}
+    </Script>
   );
 };
 

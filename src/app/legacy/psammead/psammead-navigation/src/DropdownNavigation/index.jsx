@@ -14,7 +14,7 @@ import {
   GEL_SPACING,
   GEL_SPACING_HLF_TRPL,
 } from '#psammead/gel-foundations/src/spacings';
-import Head from 'next/head';
+import Script from 'next/script';
 import {
   GEL_GROUP_3_SCREEN_WIDTH_MIN,
   GEL_GROUP_B_MIN_WIDTH,
@@ -268,13 +268,12 @@ CanonicalMenuButton.defaultProps = {
 };
 
 const AmpHead = () => (
-  <Head>
-    <script
-      async
-      custom-element="amp-bind"
-      src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
-    />
-  </Head>
+  <Script
+    id="amp-bind-script"
+    async
+    custom-element="amp-bind"
+    src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
+  />
 );
 
 const expandedHandler =
@@ -286,7 +285,8 @@ export const AmpMenuButton = ({ announcedText, onToggle, dir, script }) => (
   <>
     <AmpHead />
     <amp-state id="menuState">
-      <script
+      <Script
+        id="amp-initial-state-script"
         type="application/json"
         /* eslint-disable-next-line react/no-danger */
         dangerouslySetInnerHTML={{ __html: JSON.stringify(initialState) }}

@@ -1,5 +1,5 @@
 import React from 'react';
-import Head from 'next/head';
+import Script from 'next/script';
 import isLive from '#lib/utilities/isLive';
 
 const buildScript = ({
@@ -8,9 +8,8 @@ const buildScript = ({
   identityPoolId,
   guestRoleArn,
 }) => (
-  <Head>
-    <script>
-      {`
+  <Script id="aws-script">
+    {`
         (function(n,i,v,r,s,c,x,z){x=window.AwsRumClient={q:[],n:n,i:i,v:v,r:r,c:c};window[n]=function(c,p){x.q.push({c:c,p:p});};z=document.createElement('script');z.async=true;z.src=s;document.head.insertBefore(z,document.head.getElementsByTagName('script')[0]);})(
         'cwr',
         '${applicationId}',
@@ -27,8 +26,7 @@ const buildScript = ({
           enableXRay: false
         });
       `}
-    </script>
-  </Head>
+  </Script>
 );
 
 const RUMLoader = Component => {

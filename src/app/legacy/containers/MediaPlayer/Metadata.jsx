@@ -1,5 +1,5 @@
 import React from 'react';
-import Head from 'next/head';
+import Script from 'next/script';
 import pathOr from 'ramda/src/pathOr';
 import { shape, string } from 'prop-types';
 import { mediaPlayerMetadata } from './helpers/metadata';
@@ -14,11 +14,13 @@ const Metadata = ({ aresMediaBlock, embedSource }) => {
   const metadata = mediaPlayerMetadata(aresMediaBlocks, embedSource);
 
   return (
-    <Head>
+    <>
       {metadata && (
-        <script type="application/ld+json">{JSON.stringify(metadata)}</script>
+        <Script id="media-player-metadata-script" type="application/ld+json">
+          {JSON.stringify(metadata)}
+        </Script>
       )}
-    </Head>
+    </>
   );
 };
 

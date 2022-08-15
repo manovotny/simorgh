@@ -16,6 +16,7 @@ import { getSansRegular } from '#psammead/psammead-styles/src/font-styles';
 import getAdsAriaLabel from '../utilities/getAdsAriaLabel';
 import AdSlot from './AdSlot';
 import { ampLeaderboardStyles, ampMpuStyles } from '../utilities/adSlotStyles';
+import Script from 'next/script';
 
 // styled-components removes non-standard attributes (such as AMP attributes) on
 // server rendering. spreading props like this allows us to add AMP attributes
@@ -78,9 +79,9 @@ export const AMP_ACCESS_FETCH = service => {
   const togglesEndpoint = `${process.env.NEXT_PUBLIC_SIMORGH_CONFIG_URL}?application=simorgh&service=${service}`;
 
   return (
-    <script id="amp-access" type="application/json">
+    <Script id="amp-access" type="application/json">
       {JSON.stringify(AMP_ACCESS_DATA(togglesEndpoint))}
-    </script>
+    </Script>
   );
 };
 

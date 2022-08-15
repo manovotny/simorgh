@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Head from 'next/head';
+import Script from 'next/script';
 import { string, oneOf, elementType } from 'prop-types';
 import styled from '@emotion/styled';
 import {
@@ -73,17 +74,15 @@ const AmpMostRead = ({ endpoint, size, wrapper: Wrapper }) => {
   return (
     <amp-script id="dataFunctions" script="local-script">
       <Wrapper>
-        <Head>
-          <script
-            id="local-script"
-            type="text/plain"
-            target="amp-script"
-            custom-element="amp-iframe"
-            src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
-          >
-            `${onlyinnerscript}`
-          </script>
-        </Head>
+        <Script
+          id="local-script"
+          type="text/plain"
+          target="amp-script"
+          custom-element="amp-iframe"
+          src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"
+        >
+          `${onlyinnerscript}`
+        </Script>
         <Head>
           {/* Import required amp scripts for most read */}
           {AMP_LIST_JS}
