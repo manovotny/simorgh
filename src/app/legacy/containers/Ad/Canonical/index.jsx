@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
 import Script from 'next/script';
 import { oneOf, string } from 'prop-types';
 import styled from '@emotion/styled';
@@ -37,7 +36,6 @@ export const getBootstrapSrc = (queryString, useLegacy = false) => {
 
 const CanonicalAd = ({ slotType, className }) => {
   const { showAdsBasedOnLocation } = useContext(RequestContext);
-  const location = useLocation();
   const queryString = location.search;
   const { translations, dir } = useContext(ServiceContext);
   const label = pathOr(
