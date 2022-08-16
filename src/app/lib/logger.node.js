@@ -86,23 +86,23 @@ class Logger {
     const file = callingFile;
 
     this.error = (event, message) => {
-      console.error({ file, event, message });
+      // console.error({ file, event, message });
     };
 
     this.warn = (event, message) => {
-      console.warn({ file, event, message });
+      // console.warn({ file, event, message });
     };
 
     this.info = (event, message) => {
-      console.info({ file, event, message });
+      // console.info({ file, event, message });
     };
 
     this.debug = (event, message) => {
-      console.debug({ file, event, message });
+      // console.debug({ file, event, message });
     };
 
     this.verbose = (event, message) => {
-      console.log({ file, event, message });
+      // console.log({ file, event, message });
     };
   }
 }
