@@ -4,6 +4,7 @@ import ms from 'ms';
 import glob from 'glob';
 import FrontPage from '#pages/FrontPage/FrontPage';
 import { FRONT_PAGE } from '#app/routes/utils/pageTypes';
+import getToggles from '#lib/utilities/getToggles';
 
 import filterUnknownContentTypes from '#app/routes/utils/sharedDataTransformers/filterUnknownContentTypes';
 import filterEmptyGroupItems from '#app/routes/utils/sharedDataTransformers/filterEmptyGroupItems';
@@ -42,11 +43,14 @@ export const getStaticProps = async ({ params }) => {
     mostRead = JSON.parse(await fs.readFile(mostReadPath, 'utf-8'));
   } catch {}
 
+  const toggles = await getToggles(service);
+
   return {
     props: {
       pageData,
       pageType: FRONT_PAGE,
       mostRead,
+      toggles,
     },
     revalidate: ms('5m'),
   };

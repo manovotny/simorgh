@@ -17,22 +17,9 @@ const cache = createCache({ key: 'next' });
 const App = ({ Component, pageProps, router }) => {
   const { asPath, query } = router;
   const { service } = query;
-  const { pageData, pageType } = pageProps;
+  const { pageData, pageType, toggles } = pageProps;
   const language = pageData?.metadata?.language || 'en-gb';
   const status = 200;
-
-  // Purposely not using `getToggles` from `#lib/utilities/getToggles`
-  // because it does a bunch of async logging, which means we'd need to use
-  // `useEffect` or `getInitialProps` and that would disable SSR. The benefit
-  // is not *that* important to warrant turning that off.
-  //
-  // Could also be moved to the Layout RFC, but just going to keep it simple.
-  //
-  // import getToggles from '#lib/utilities/getToggles';
-  // const toggles = await getToggles(service);
-
-  const environment = process.env.NEXT_PUBLIC_SIMORGH_APP_ENV || 'local';
-  const toggles = getToggles[environment];
 
   return (
     <CacheProvider value={cache}>

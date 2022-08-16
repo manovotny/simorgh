@@ -7,6 +7,7 @@ import handleGroupBlocks from '#app/routes/article/handleGroupBlocks';
 import handleEmptyParagraphBlocks from '#app/routes/article/handleEmptyParagraphBlocks';
 import handlePromoData from '#app/routes/article/handlePromoData';
 import addMpuBlock from '#app/routes/article/getInitialData/addMpuBlock';
+import getToggles from '#lib/utilities/getToggles';
 
 import {
   augmentWithTimestamp,
@@ -69,6 +70,8 @@ export const getStaticProps = async ({ params }) => {
     );
   } catch {}
 
+  const toggles = await getToggles(service);
+
   return {
     props: {
       pageData: {
@@ -77,6 +80,7 @@ export const getStaticProps = async ({ params }) => {
       },
       pageType: ARTICLE_PAGE,
       mostRead,
+      toggles,
     },
     revalidate: ms('1h'),
   };
