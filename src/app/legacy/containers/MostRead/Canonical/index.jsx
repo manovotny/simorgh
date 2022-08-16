@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import 'isomorphic-fetch';
 import { oneOf, string, elementType, shape } from 'prop-types';
 import { RequestContext } from '#contexts/RequestContext';
 import { ServiceContext } from '#contexts/ServiceContext';

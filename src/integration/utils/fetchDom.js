@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-const fetch = require('isomorphic-fetch');
 const { JSDOM } = require('jsdom');
 const retry = require('retry');
 
