@@ -7,19 +7,21 @@ import Head from 'next/head';
 import PageWrapper from '#app/Layouts/defaultPageWrapper';
 import { ToggleContextProvider } from '#contexts/ToggleContext';
 import { ServiceContextProvider } from '#contexts/ServiceContext';
-import getToggles from '#lib/config/toggles';
 import { RequestContextProvider } from '#contexts/RequestContext';
 import { EventTrackingContextProvider } from '#contexts/EventTrackingContext';
 import { UserContextProvider } from '#contexts/UserContext';
+import Error from 'next/error';
 
 const cache = createCache({ key: 'next' });
 
 const App = ({ Component, pageProps, router }) => {
-  const { asPath, query } = router;
-  const { service } = query;
-  const { pageData, pageType, toggles } = pageProps;
+  const { asPath } = router;
+  const { pageData, pageType, toggles, service, statusCode } = pageProps;
   const language = pageData?.metadata?.language || 'en-gb';
-  const status = 200;
+
+  if (statusCode !== 200) {
+    return <Error statusCode={statusCode} />;
+  }
 
   return (
     <CacheProvider value={cache}>
@@ -49,12 +51,12 @@ const App = ({ Component, pageProps, router }) => {
             <RequestContextProvider
               pageType={pageType}
               service={service}
-              statusCode={status}
+              statusCode={statusCode}
               pathname={asPath}
             >
               <EventTrackingContextProvider pageData={pageProps}>
                 <UserContextProvider>
-                  <PageWrapper pageData={pageData} status={status}>
+                  <PageWrapper pageData={pageData} status={statusCode}>
                     <Component {...pageProps} />
                   </PageWrapper>
                 </UserContextProvider>
