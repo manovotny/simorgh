@@ -8,8 +8,8 @@ const CanonicalAdBootstrapJs = ({ adcampaign }) => {
         window.dotcom = window.dotcom || { cmd: [] };
         window.dotcomConfig = {
           pageAds: true,
-          playerAds: false,
-          ${adcampaign ? "adcampaign: ' + adcampaign + '" : ''}
+          playerAds: false
+          ${adcampaign ? ", adcampaign: ' + adcampaign + '" : ''}
         };
       `}
     </Script>
