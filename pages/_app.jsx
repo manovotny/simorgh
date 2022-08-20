@@ -1,4 +1,3 @@
-import { SWRConfig } from 'swr';
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import React from 'react';
@@ -25,46 +24,36 @@ const App = ({ Component, pageProps, router }) => {
 
   return (
     <CacheProvider value={cache}>
-      <SWRConfig
-        value={{
-          fetcher: (resource, init) =>
-            fetch(resource, init).then(res => res.json()),
-        }}
-      >
-        <Head>
-          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <meta charSet="utf-8" />
-          <meta
-            name="robots"
-            content="noodp, noydir, max-image-preview:large"
-          />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, minimum-scale=1"
-          />
-          <meta name="mobile-web-app-capable" content="yes" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        </Head>
-        <ToggleContextProvider toggles={toggles}>
-          <ServiceContextProvider service={service} pageLang={language}>
-            <RequestContextProvider
-              pageType={pageType}
-              service={service}
-              statusCode={statusCode}
-              pathname={asPath}
-            >
-              <EventTrackingContextProvider pageData={pageProps}>
-                <UserContextProvider>
-                  <PageWrapper pageData={pageData} status={statusCode}>
-                    <Component {...pageProps} />
-                  </PageWrapper>
-                </UserContextProvider>
-              </EventTrackingContextProvider>
-            </RequestContextProvider>
-          </ServiceContextProvider>
-        </ToggleContextProvider>
-      </SWRConfig>
+      <Head>
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta charSet="utf-8" />
+        <meta name="robots" content="noodp, noydir, max-image-preview:large" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1"
+        />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+      </Head>
+      <ToggleContextProvider toggles={toggles}>
+        <ServiceContextProvider service={service} pageLang={language}>
+          <RequestContextProvider
+            pageType={pageType}
+            service={service}
+            statusCode={statusCode}
+            pathname={asPath}
+          >
+            <EventTrackingContextProvider pageData={pageProps}>
+              <UserContextProvider>
+                <PageWrapper pageData={pageData} status={statusCode}>
+                  <Component {...pageProps} />
+                </PageWrapper>
+              </UserContextProvider>
+            </EventTrackingContextProvider>
+          </RequestContextProvider>
+        </ServiceContextProvider>
+      </ToggleContextProvider>
     </CacheProvider>
   );
 };
