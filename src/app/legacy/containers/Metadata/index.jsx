@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { string, node, shape, arrayOf, bool, number } from 'prop-types';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import { ServiceContext } from '#contexts/ServiceContext';
 import { RequestContext } from '#contexts/RequestContext';
 import {
@@ -99,12 +99,6 @@ const MetadataContainer = ({
     },
   ];
 
-  const htmlAttributes = {
-    dir,
-    lang,
-    ...(isAmp && { amp: '' }), // empty value as this makes Helmet render 'amp' as per https://www.ampproject.org/docs/fundamentals/spec#ampd
-  };
-
   const pageTitle = `${title} - ${brandName}`;
   const socialTitle = `${socialHeadline || title} - ${brandName}`;
 
@@ -113,15 +107,8 @@ const MetadataContainer = ({
   const linkToAmpPage = hasAmpPage && !isAmp;
 
   return (
-    <Helmet htmlAttributes={htmlAttributes}>
-      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-      <meta charSet="utf-8" />
-      <meta name="robots" content="noodp, noydir, max-image-preview:large" />
+    <Head>
       <meta name="theme-color" content={themeColor} />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1"
-      />
       <title>{pageTitle}</title>
       <link rel="canonical" href={canonicalNonUkLink} />
       {isEnglishService && alternateLinksEnglishSites.map(renderAlternateLinks)}
@@ -141,7 +128,6 @@ const MetadataContainer = ({
       <meta property="fb:admins" content={FACEBOOK_ADMIN_ID} />
       <meta property="fb:app_id" content={FACEBOOK_APP_ID} />
       <meta property="fb:pages" content={FACEBOOK_PAGES} />
-      <meta name="mobile-web-app-capable" content="yes" />
       <meta name="msapplication-TileColor" content={themeColor} />
       <meta
         name="msapplication-TileImage"
@@ -157,7 +143,6 @@ const MetadataContainer = ({
       <meta property="og:title" content={socialTitle} />
       <meta property="og:type" content={openGraphType} />
       <meta property="og:url" content={canonicalNonUkLink} />
-      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content={twitterCreator} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image:alt" content={metaImageAltText} />
@@ -178,9 +163,8 @@ const MetadataContainer = ({
         rel="apple-touch-startup-image"
         href={getIconAssetUrl(service, '512x512')}
       />
-      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       {children}
-    </Helmet>
+    </Head>
   );
 };
 

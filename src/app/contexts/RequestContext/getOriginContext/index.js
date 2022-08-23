@@ -7,9 +7,9 @@ const getOriginContext = bbcOrigin => {
   } else if (
     process &&
     process.env &&
-    process.env.SIMORGH_APP_ENV === 'local'
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'development'
   ) {
-    origin = process.env.SIMORGH_BASE_URL;
+    origin = process.env.NEXT_PUBLIC_SIMORGH_BASE_URL;
   } else if (
     typeof window !== 'undefined' &&
     window.location &&

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { number, oneOf, string, shape } from 'prop-types';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import { ServiceContext } from '#contexts/ServiceContext';
 import ErrorMain from '#components/ErrorMain';
 
@@ -14,7 +14,7 @@ const ErrorMetadata = ({ dir, lang, messaging, brandName, themeColor }) => {
   const pageTitle = `${title} - ${brandName}`;
 
   return (
-    <Helmet htmlAttributes={{ lang, dir }}>
+    <Head>
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta charSet="utf-8" />
       <meta name="robots" content="noindex,nofollow" />
@@ -29,7 +29,7 @@ const ErrorMetadata = ({ dir, lang, messaging, brandName, themeColor }) => {
       <meta name="twitter:description" content={title} />
       <meta name="twitter:title" content={pageTitle} />
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    </Helmet>
+    </Head>
   );
 };
 

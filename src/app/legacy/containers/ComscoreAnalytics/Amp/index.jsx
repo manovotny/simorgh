@@ -1,8 +1,10 @@
 import React from 'react';
+import Script from 'next/script';
 
 const AmpComscoreAnalytics = () => (
   <amp-analytics type="comscore">
-    <script
+    <Script
+      id="amp-comscore-anayltics-script"
       type="application/json"
       /* eslint-disable-next-line react/no-danger */
       dangerouslySetInnerHTML={{

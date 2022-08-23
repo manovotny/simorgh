@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { pathToRegexp } from 'path-to-regexp';
 import InlineLink from '#psammead/psammead-inline-link/src';
 import pathOr from 'ramda/src/pathOr';
@@ -9,8 +9,6 @@ import makeRelativeUrlPath from '#lib/utilities/makeRelativeUrlPath';
 import Blocks from '../Blocks';
 import fragment from '../Fragment';
 import { articlePath } from '../../../routes/utils/regex';
-
-const InternalInlineLink = InlineLink.withComponent(Link);
 
 const componentsToRender = { fragment };
 
@@ -28,25 +26,28 @@ const InlineLinkContainer = ({ locator, isExternal, blocks, onClick }) => {
     const path = result[0];
     const hash = locator.split('#')[1] || null;
     return (
-      <InternalInlineLink to={{ pathname: path, hash }}>
-        <Blocks blocks={blocks} componentsToRender={componentsToRender} />
-      </InternalInlineLink>
+      <Link href={`${path}#${hash}`} passHref>
+        <InlineLink>
+          <Blocks blocks={blocks} componentsToRender={componentsToRender} />
+        </InlineLink>
+      </Link>
     );
   }
 
   const linkText = pathOr(null, [0, 'model', 'text'], blocks);
   return (
-    <InlineLink
-      href={makeRelativeUrlPath(locator)}
-      aria-label={isExternal ? `${linkText}${externalLinkText}` : null}
-      onClick={event => {
-        if (onClick) {
-          onClick(event);
-        }
-      }}
-    >
-      <Blocks blocks={blocks} componentsToRender={componentsToRender} />
-    </InlineLink>
+    <Link href={makeRelativeUrlPath(locator)} passHref>
+      <InlineLink
+        aria-label={isExternal ? `${linkText}${externalLinkText}` : null}
+        onClick={event => {
+          if (onClick) {
+            onClick(event);
+          }
+        }}
+      >
+        <Blocks blocks={blocks} componentsToRender={componentsToRender} />
+      </InlineLink>
+    </Link>
   );
 };
 

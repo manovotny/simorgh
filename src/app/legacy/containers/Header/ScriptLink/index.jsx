@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { compile } from 'path-to-regexp';
 import clone from 'ramda/src/clone';
 import { string } from 'prop-types';
-import { useRouteMatch } from 'react-router-dom';
 import ScriptLink from '#psammead/psammead-script-link/src';
 import { UserContext } from '#contexts/UserContext';
 import { ServiceContext } from '#contexts/ServiceContext';
 import useToggle from '#hooks/useToggle';
+import { useRouter } from 'next/router';
 
 export const getVariantHref = ({
   path,
@@ -49,7 +49,8 @@ const ScriptLinkContainer = ({ scriptSwitchId }) => {
   const { service, script, scriptLink } = useContext(ServiceContext);
   const { enabled: scriptLinkEnabled } = useToggle('scriptLink');
   const { enabled: variantCookieEnabled } = useToggle('variantCookie');
-  const { path, params } = useRouteMatch();
+  const router = useRouter();
+  const { asPath, params } = router;
 
   if (!scriptLinkEnabled) {
     return null;
@@ -62,7 +63,7 @@ const ScriptLinkContainer = ({ scriptSwitchId }) => {
       script={script}
       service={service}
       href={getVariantHref({
-        path,
+        path: asPath,
         params,
         service,
         variant,

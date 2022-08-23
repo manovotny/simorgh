@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import 'isomorphic-fetch';
 import { string } from 'prop-types';
 import styled from '@emotion/styled';
 import moment from 'moment';

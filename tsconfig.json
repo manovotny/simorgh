@@ -13,7 +13,7 @@
     "isolatedModules": true, // Unconditionally emit imports for unresolved files
     "resolveJsonModule": true, // Include modules imported with .json extension
     "noEmit": true, // Do not emit output (meaning do not compile code, only perform type checkin
-    "jsx": "react", // Support JSX in .tsx files
+    "jsx": "preserve", // Support JSX in .tsx files
     "sourceMap": true, // Generate corrresponding .map file
     "declaration": true, // Generate corresponding .d.ts file
     "noUnusedLocals": true, // Report errors on unused locals
@@ -22,5 +22,19 @@
     "noFallthroughCasesInSwitch": true // Report errors for fallthrough cases in switch statement
   },
   "include": ["src/app/components/**/*"],
-  "exclude": ["node_modules", "build"]
+  "exclude": ["node_modules", "build"],
+  "paths": {
+    "#app/*": ["./src/app/*"],
+    "#contexts/*": ["./src/app/contexts/*"],
+    "#components/*": ["./src/app/legacy/components/*"],
+    "#containers/*": ["./src/app/legacy/containers/*"],
+    "#data/*": ["./data/*"],
+    "#hooks/*": [".src/app/hooks/*"],
+    "#psammead/*": ["./src/app/legacy/psammead/*"],
+    "#lib/*": ["./src/app/lib/*"],
+    "#models/*": ["./src/app/models/*"],
+    "#pages/*": ["./src/app/pages/*"],
+    "#testHelpers/*": ["./src/testHelpers/*"],
+    "#server/*": ["./src/server/*"]
+  }
 }

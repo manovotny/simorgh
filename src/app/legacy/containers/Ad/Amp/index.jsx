@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { oneOf } from 'prop-types';
 import styled from '@emotion/styled';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import pathOr from 'ramda/src/pathOr';
 import { RequestContext } from '#contexts/RequestContext';
 import { ServiceContext } from '#contexts/ServiceContext';
@@ -16,6 +16,7 @@ import { getSansRegular } from '#psammead/psammead-styles/src/font-styles';
 import getAdsAriaLabel from '../utilities/getAdsAriaLabel';
 import AdSlot from './AdSlot';
 import { ampLeaderboardStyles, ampMpuStyles } from '../utilities/adSlotStyles';
+import Script from 'next/script';
 
 // styled-components removes non-standard attributes (such as AMP attributes) on
 // server rendering. spreading props like this allows us to add AMP attributes
@@ -75,12 +76,12 @@ const AMP_ACCESS_DATA = endpoint => ({
 const LABEL_LINK = 'https://www.bbc.com/usingthebbc/cookies/';
 
 export const AMP_ACCESS_FETCH = service => {
-  const togglesEndpoint = `${process.env.SIMORGH_CONFIG_URL}?application=simorgh&service=${service}`;
+  const togglesEndpoint = `${process.env.NEXT_PUBLIC_SIMORGH_CONFIG_URL}?application=simorgh&service=${service}`;
 
   return (
-    <script id="amp-access" type="application/json">
+    <Script id="amp-access" type="application/json">
       {JSON.stringify(AMP_ACCESS_DATA(togglesEndpoint))}
-    </script>
+    </Script>
   );
 };
 
@@ -163,11 +164,11 @@ const AmpAd = ({ slotType }) => {
 
   return (
     <>
-      <Helmet>
+      <Head>
         {AMP_ADS_JS}
         {AMP_ACCESS_JS}
         {AMP_ACCESS_FETCH(service)}
-      </Helmet>
+      </Head>
       <Advert
         service={service}
         script={script}

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import AmpGeo from '#components/AmpGeo';
 import Banner from './Banner/index.amp';
+import Script from 'next/script';
 
 const ampConsentData = {
   consents: {
@@ -24,7 +25,8 @@ const ampConsentData = {
 };
 
 const jsonInlinedScript = data => (
-  <script
+  <Script
+    id="consent-banner-script"
     type="application/json"
     /* eslint-disable-next-line react/no-danger */
     dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}

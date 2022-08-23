@@ -3,7 +3,7 @@ import { node, object } from 'prop-types';
 import defaultToggles from '#lib/config/toggles';
 import { toggleReducer } from './reducer';
 
-const environment = process.env.SIMORGH_APP_ENV || 'local';
+const environment = process.env.NEXT_PUBLIC_VERCEL_ENV || 'development';
 
 const ToggleContext = createContext({});
 

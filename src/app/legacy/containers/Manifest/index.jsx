@@ -1,18 +1,14 @@
 import React, { useContext } from 'react';
-import { Helmet } from 'react-helmet';
+import Head from 'next/head';
 import { ServiceContext } from '#contexts/ServiceContext';
 
 const ManifestContainer = () => {
-  const { manifestPath, service } = useContext(ServiceContext);
-
-  if (!manifestPath) {
-    return null;
-  }
+  const { service } = useContext(ServiceContext);
 
   return (
-    <Helmet>
-      <link rel="manifest" href={`/${service}${manifestPath}`} />
-    </Helmet>
+    <Head>
+      <link rel="manifest" href={`/${service}/manifest.json`} />
+    </Head>
   );
 };
 

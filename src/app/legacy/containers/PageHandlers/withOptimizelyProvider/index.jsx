@@ -18,7 +18,7 @@ if (isLive() || isCypress) {
 }
 
 const optimizely = createInstance({
-  sdkKey: process.env.SIMORGH_OPTIMIZELY_SDK_KEY,
+  sdkKey: process.env.NEXT_PUBLIC_SIMORGH_OPTIMIZELY_SDK_KEY,
   eventBatchSize: 10,
   eventFlushInterval: 1000,
 });

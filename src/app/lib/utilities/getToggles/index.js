@@ -34,9 +34,9 @@ const logResponseTime = async (url, origin, service, timeout) => {
 };
 
 const getToggles = async (service, cache) => {
-  const environment = process.env.SIMORGH_APP_ENV || 'local';
+  const environment = process.env.NEXT_PUBLIC_VERCEL_ENV || 'development';
   const timeout =
-    parseInt(process.env.SIMORGH_CONFIG_TIMEOUT_SECONDS, 10) * 1000;
+    parseInt(process.env.NEXT_PUBLIC_SIMORGH_CONFIG_TIMEOUT_SECONDS, 10) * 1000;
   const localToggles = defaultToggles[environment];
   if (!localToggles.enableFetchingToggles.enabled) {
     return localToggles;

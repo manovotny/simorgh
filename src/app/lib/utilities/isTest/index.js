@@ -1,1 +1,1 @@
-export default () => process.env.SIMORGH_APP_ENV === 'test';
+export default () => process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview';

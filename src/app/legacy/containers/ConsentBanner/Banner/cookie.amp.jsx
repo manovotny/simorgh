@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import Script from 'next/script';
 import { bool, string, arrayOf, element, shape } from 'prop-types';
 import styled from '@emotion/styled';
 import { scriptPropType } from '#psammead/gel-foundations/src/prop-types';
@@ -202,13 +202,12 @@ const AmpCookieBanner = ({
 
   return (
     <div id={id} hidden={hidden}>
-      <Helmet>
-        <script
-          async
-          custom-element="amp-bind"
-          src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
-        />
-      </Helmet>
+      <Script
+        id="amp-bind-script"
+        async
+        custom-element="amp-bind"
+        src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
+      />
       <Wrapper service={service}>
         <BannerPage
           data-amp-bind-hidden="isManagingSettings"

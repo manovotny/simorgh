@@ -36,14 +36,8 @@ export const getIconLinks = (service, iconSizes) => {
   });
 };
 
-export const getAppleTouchUrl = service => {
-  return [
-    process.env.SIMORGH_PUBLIC_STATIC_ASSETS_ORIGIN,
-    process.env.SIMORGH_PUBLIC_STATIC_ASSETS_PATH,
-    service,
-    '/images/icons/icon-192x192.png',
-  ].join('');
-};
+export const getAppleTouchUrl = service =>
+  `/${service}/images/icons/icon-192x192.png`;
 
 export const renderAlternateLinks = link => (
   <link

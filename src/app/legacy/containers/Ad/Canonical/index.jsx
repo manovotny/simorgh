@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import Script from 'next/script';
 import { oneOf, string } from 'prop-types';
 import styled from '@emotion/styled';
 import pathOr from 'ramda/src/pathOr';
@@ -37,7 +36,6 @@ export const getBootstrapSrc = (queryString, useLegacy = false) => {
 
 const CanonicalAd = ({ slotType, className }) => {
   const { showAdsBasedOnLocation } = useContext(RequestContext);
-  const location = useLocation();
   const queryString = location.search;
   const { translations, dir } = useContext(ServiceContext);
   const label = pathOr(
@@ -71,15 +69,18 @@ const CanonicalAd = ({ slotType, className }) => {
 
   return (
     <>
-      <Helmet>
-        {/* Add Ad scripts to document head */}
-        <script type="module" src={getBootstrapSrc(queryString)} async />
-        <script
-          nomodule="nomodule"
-          src={getBootstrapSrc(queryString, true)}
-          async
-        />
-      </Helmet>
+      <Script
+        id="bootstrap-src-module-script"
+        type="module"
+        src={getBootstrapSrc(queryString)}
+        async
+      />
+      <Script
+        id="bootstrap-src-nomodule-script"
+        nomodule="nomodule"
+        src={getBootstrapSrc(queryString, true)}
+        async
+      />
 
       <AdContainer
         slotType={slotType}

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Helmet } from 'react-helmet';
+import Script from 'next/script';
 import { string, shape, arrayOf, bool, object } from 'prop-types';
 import { ServiceContext } from '#contexts/ServiceContext';
 import { RequestContext } from '#contexts/RequestContext';
@@ -105,14 +105,12 @@ const LinkedData = ({
   };
 
   return (
-    <Helmet>
-      <script type="application/ld+json">
-        {serialiseForScript({
-          '@context': 'http://schema.org',
-          '@graph': [{ ...linkedData }, ...entities],
-        })}
-      </script>
-    </Helmet>
+    <Script id="schema-script" type="application/ld+json">
+      {serialiseForScript({
+        '@context': 'http://schema.org',
+        '@graph': [{ ...linkedData }, ...entities],
+      })}
+    </Script>
   );
 };
 

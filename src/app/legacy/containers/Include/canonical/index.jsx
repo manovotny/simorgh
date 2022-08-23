@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import React from 'react';
 import { string, number } from 'prop-types';
-import { Helmet } from 'react-helmet';
+import Script from 'next/script';
 import styled from '@emotion/styled';
 import { GEL_SPACING_QUIN } from '#psammead/gel-foundations/src/spacings';
 import { GridItemMedium } from '#components/Grid';
@@ -38,13 +38,16 @@ const CanonicalIncludeContainer = ({ html, type, index }) => {
   return (
     <GridItemMedium>
       {requireIncludeTypes.includes(type) && (
-        <Helmet>
-          <script
+        <>
+          <Script
+            id="require-script"
             type="text/javascript"
             src="https://news.files.bbci.co.uk/include/vjassets/js/vendor/require-2.1.20b.min.js"
           />
-          <script>{configureAdditionalScripts}</script>
-        </Helmet>
+          <Script id="additional-scripts-script">
+            {configureAdditionalScripts}
+          </Script>
+        </>
       )}
       <Include
         suppressHydrationWarning

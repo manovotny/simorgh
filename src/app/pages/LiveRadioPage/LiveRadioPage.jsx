@@ -18,10 +18,6 @@ import ChartbeatAnalytics from '#containers/ChartbeatAnalytics';
 import MetadataContainer from '#containers/Metadata';
 import ATIAnalytics from '#containers/ATIAnalytics';
 
-const staticAssetsPath = `${process.env.SIMORGH_PUBLIC_STATIC_ASSETS_ORIGIN}${process.env.SIMORGH_PUBLIC_STATIC_ASSETS_PATH}`;
-
-const audioPlaceholderImageSrc = `${staticAssetsPath}images/amp_audio_placeholder.png`;
-
 const LiveRadioPage = ({ pageData }) => {
   const {
     language,
@@ -121,7 +117,7 @@ const LiveRadioPage = ({ pageData }) => {
             title="Live radio"
             type="audio"
             skin="audio"
-            placeholderSrc={audioPlaceholderImageSrc}
+            placeholderSrc={'/images/amp_audio_placeholder.png'}
           />
         </Grid>
       </GelPageGrid>
