@@ -27,3 +27,4 @@ yarn-error.log
 secret.env
 tsconfig.tsbuildinfo
 .next
+.vercel

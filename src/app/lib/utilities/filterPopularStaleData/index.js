@@ -18,7 +18,7 @@ const filterPopularStaleData = ({
     return null;
   }
   // The ARES test endpoint for most read/watched renders fixture data, so the data is stale
-  const isTest = process.env.NEXT_PUBLIC_SIMORGH_APP_ENV === 'test';
+  const isTest = process.env.NEXT_PUBLIC_VERCEL_ENV === 'preview';
   const logEvent =
     popularType === 'mostRead' ? MOST_READ_STALE_DATA : MOST_WATCHED_STALE_DATA;
   // Do not show most read if lastRecordUpdated is greater than 60min as this means PopAPI has failed twice

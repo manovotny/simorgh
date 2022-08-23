@@ -7,7 +7,7 @@ const getOriginContext = bbcOrigin => {
   } else if (
     process &&
     process.env &&
-    process.env.NEXT_PUBLIC_SIMORGH_APP_ENV === 'local'
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'development'
   ) {
     origin = process.env.NEXT_PUBLIC_SIMORGH_BASE_URL;
   } else if (
