@@ -3,46 +3,20 @@ import ms from 'ms';
 import glob from 'glob';
 import { getArticlePageProps } from '../../../lib/fake-bbc-api';
 import ArticlePage from '#pages/ArticlePage/ArticlePage';
-import getOptimizelyUserId from '#containers/PageHandlers/withOptimizelyProvider/getOptimizelyUserId';
-import { createInstance, OptimizelyProvider } from '@optimizely/react-sdk';
-import { GEL_GROUP_3_SCREEN_WIDTH_MAX } from '#psammead/gel-foundations/src/breakpoints';
+import withOptimizelyProvider from '#containers/PageHandlers/withOptimizelyProvider';
 
-const optimizely = createInstance({
-  sdkKey: process.env.NEXT_PUBLIC_SIMORGH_OPTIMIZELY_SDK_KEY,
-  eventBatchSize: 10,
-  eventFlushInterval: 1000,
-});
-
-const Article = ({ pageData, mostRead, service }) => {
-  const isClientSide = typeof window !== 'undefined';
-  const isMobile =
-    isClientSide &&
-    window.matchMedia(`(max-width: ${GEL_GROUP_3_SCREEN_WIDTH_MAX})`).matches;
-
-  return (
-    <OptimizelyProvider
-      optimizely={optimizely}
-      isServerSide={!isClientSide}
-      timeout={ms('1s')}
-      user={{
-        id: getOptimizelyUserId(),
-        attributes: {
-          service,
-          mobile: isMobile,
-        },
-      }}
-    >
-      <ArticlePage mostRead={mostRead} pageData={pageData} />
-    </OptimizelyProvider>
-  );
-};
+const Article = ({ pageData, mostRead }) => (
+  <ArticlePage mostRead={mostRead} pageData={pageData} />
+);
 
 export const getStaticPaths = () => {
-  // This is the only article that works without an API secret.
-  const articlePath = './data/news/articles/c6v11qzyv8po.json';
+  // These are the only articles that works without an API secret.
+  // https://github.com/manovotny/simorgh/tree/9fe338c4505146ff31e17e57344263cf1bb42557#local-development
+  const articlePaths =
+    './data/news/articles/c6v11qzyv8po.json|./data/persian/articles/c4vlle3q337o.json';
 
   const paths = glob
-    .sync(articlePath)
+    .sync(articlePaths)
     .map(result => `/news/articles/${path.parse(result).name}`);
 
   return { paths, fallback: 'blocking' };
@@ -58,4 +32,4 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-export default Article;
+export default withOptimizelyProvider(Article);
